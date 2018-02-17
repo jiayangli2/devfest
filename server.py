@@ -40,7 +40,7 @@ def login():
         pwd = request.form['password']
         try:
             temp = User.query.filter_by(username=uname).first()
-            if temp == None || temp.password != pwd:
+            if temp == None or temp.password != pwd:
                 err_msg = "incorrect username or password"
                 context = dict(data = err_msg)
                 render_template("error.html", **context)
