@@ -1,59 +1,85 @@
 from flask import Flask, request, render_template, g, redirect, Response, session, escape, url_for
+from flask_sqlalchemy import SQLAlchemy
+import os
+import populate from helper
+
 app = Flask(__name__)
+app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:////home/ubuntu/devfest/app.db' 
+app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = True
+
+db = SQLAlchemy(app)
+
+class User(db.Model):
+    username = db.Column(db.String(80), primary_key=True, nullable=False)
+    fullname = db.Column(db.String(80), nullable=False)
+    password = db.Column(db.String(120), nullable=False)
+    email = db.Column(db.String(120), unique=True, nullable=False)
+    phone = db.Column(db.String(120), unique=True, nullable=False)
+
+
+    def __repr__(self):
+        return '<User %r>' % self.username
+
 
 
 @app.route('/')
 def index():
-  """
-  request is a special object that Flask provides to access web request information:
-  request.method:   "GET" or "POST"
-  request.form:     if the browser submitted a form, this contains the data in the form
-  request.args:     dictionary of URL arguments, e.g., {a:1, b:2} for http://localhost?a=1&b=2
-  See its API: http://flask.pocoo.org/docs/0.10/api/#incoming-request-data
-  """
-  # DEBUG: this is debugging code to see what request looks like
+
+    # DEBUG: this is debugging code to see what request looks like
   print (request.args)
-  #
-  # example of a database query
-  #
+
   names = ["grace hopper", "alan turing", "ada lovelace"]
-  #
-  # Flask uses Jinja templates, which is an extension to HTML where you can
-  # pass data to a template and dynamically generate HTML based on the data
-  # (you can think of it as simple PHP)
-  # documentation: https://realpython.com/blog/python/primer-on-jinja-templating/
-  #
-  # You can see an example template in templates/index.html
-  #
-  # context are the variables that are passed to the template.
-  # for example, "data" key in the context variable defined below will be 
-  # accessible as a variable in index.html:
-  #
-  #     # will print: [u'grace hopper', u'alan turing', u'ada lovelace']
-  #     <div>{{data}}</div>
-  #     
-  #     # creates a <div> tag for each element in data
-  #     # will print: 
-  #     #
-  #     #   <div>grace hopper</div>
-  #     #   <div>alan turing</div>
-  #     #   <div>ada lovelace</div>
-  #     #
-  #     {% for n in data %}
-  #     <div>{{n}}</div>
-  #     {% endfor %}
-  #
   context = dict(data = names)
-  #
-  # render_template looks in the templates/ folder for files.
-  # for example, the below file reads template/index.html
-  #
+
   return render_template("index.html", **context)
-#
-# This is an example of a different path.  You can see it at:
-# 
-#     localhost:8111/another
-#
-# Notice that the function name is another() rather than index()
-# The functions for each app.route need to have different names
-#
+
+@app.route('/login', methods=['GET', 'POST'])
+def login():
+    if request.method == 'POST':
+        uname = request.form['username']
+        pwd = request.form['password']
+        try:
+            temp = User.query.filter_by(username=uname).first()
+            if temp == None || temp.password != pwd:
+                err_msg = "incorrect username or password"
+                context = dict(data = err_msg)
+                render_template("error.html", **context)
+            else:
+                populate(session, temp)
+                return redirect(url_for('index'))
+        except:
+            err_msg = "connection to DB failed"
+            context = dict(data = err_msg)
+            render_template("error.html", **context)
+
+@app.route('/signup', methods=['GET', 'POST'])
+def signup():
+    if request.method == 'POST':
+        uname = request.form['username']
+        pwd = request.form['password']
+        fname = request.form['fullname']
+        email = request.form['email']
+        phone = request.form['phoen']
+        user_created = Users(username = uname, fullname = fname, password = pwd, phone = phone, email = email)
+        try:
+            db.session.add(user_created)
+            db.session.commit()
+        except:
+            return "Sign Up Failed!"
+
+        populate(session, user_created)
+        return render_template("index.html")
+    elif request.method == 'GET':
+        return render_template("signup.html")
+    return "error: request not supported"
+
+@app.route('/logout')
+def logout():
+    session.pop('username', None)
+    session.pop('fullname', None)
+    session.pop('phoen', None)
+    session.pop('email', None)
+    return redirect(url_for('index'))
+
+
+
