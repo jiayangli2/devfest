@@ -1,7 +1,7 @@
 from flask import Flask, request, render_template, g, redirect, Response, session, escape, url_for
 from flask_sqlalchemy import SQLAlchemy
 import os
-import populate from helper
+from helper import populate
 
 app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:////home/ubuntu/devfest/app.db' 
@@ -82,4 +82,5 @@ def logout():
     return redirect(url_for('index'))
 
 
-
+if __name__ == '__main__':
+    app.run(host='0.0.0.0')
