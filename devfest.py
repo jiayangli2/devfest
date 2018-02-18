@@ -63,8 +63,8 @@ def get_all_events():
     event_list = []
     events = Event.query.all()
     for e in events:
-        attendee_db = db.session.query(Event, Attend, User).filter(Event.eid == Attend.eid).filter(
-            Attend.username == User.username).all()
+        attendee_db = db.session.query(Attend, User).filter(
+            Attend.username == User.username).filter(Attend.eid == e.eid).all()
         attendee = []
         for p in attendee_db:
             attendee.append(p.User.fullname)
@@ -163,14 +163,14 @@ def renderJSON():
     event_list = []
     events = Event.query.all() 
     for e in events:
-        attendee_db = db.session.query(Event, Attend, User).filter(Event.eid == Attend.eid).filter(Attend.username == User.username).all()
+        attendee_db = db.session.query(Attend, User).filter(Attend.username == User.username).filter(e.eid == Attend.eid).all()
         attendee = []
         for p in attendee_db:
             attendee.append(p.User.fullname)
         res = requests.get('https://maps.googleapis.com/maps/api/geocode/json?address=' + e.location)
         res = res.json()
-        
-        event_list.append({'host' : {'username':e.host, 'fullname':User.query.filter_by(username=e.host).first().fullname},'location' : e.location, 'get_location' : res['results'][0]['geometry']['location'], 'message' : e.message, 'time' : e.time, 'eid' : e.eid, 'attendee':attendee})
+        if len(res['results']) != 0:
+            event_list.append({'host' : {'username':e.host, 'fullname':User.query.filter_by(username=e.host).first().fullname},'location' : e.location, 'get_location' : res['results'][0]['geometry']['location'], 'message' : e.message, 'time' : e.time, 'eid' : e.eid, 'attendee':attendee})
     return jsonify(event_list)
 
 
