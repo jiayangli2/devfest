@@ -364,12 +364,14 @@ span.round-tab i{
 /* search style */
 
 .searchbar {
-  margin: 25px 0;
+  margin: 10px 0;
+  font-family: Book Antiqua, Palatino, Palatino Linotype;
 }
 
 .searchbar input {
   height: 40px;
-  font-size: 25px;
+  margin-top: 10px;
+  font-size: 20px;
 }
 
 .searchbar button {
@@ -377,6 +379,8 @@ span.round-tab i{
   color: #fff;
   height: 40px;
   font-size: 20px;
+  top: -2px;
+  border-radius: 0px !important;
 }
 
 .searchbar button:hover {

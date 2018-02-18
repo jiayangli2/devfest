@@ -23,6 +23,23 @@ function initialize()
         "location": "Times Square", 
         "message": "Watch Fifty Shades", 
         "time": "Feb 18 8 PM"
+      },
+      {
+        "attendee": [
+          "Trading Hudson"
+        ], 
+        "eid": "1518934937.912", 
+        "get_location": {
+          "lat": 40.808349, 
+          "lng": -73.962162
+        }, 
+        "host": {
+          "fullname": "Adam Hudson", 
+          "username": "hrt2"
+        }, 
+        "location": "Times Square", 
+        "message": "Wes", 
+        "time": "Feb 18 8 PM"
       }
     ];
 
@@ -69,18 +86,22 @@ function initialize()
         markers.push({"location" : new google.maps.LatLng(entry["get_location"].lat, entry["get_location"].lng), "content" : contentString});
     });
 
-    var infowindow;
+    var infowindow = new google.maps.InfoWindow();
+    var marker;
 
-    markers.forEach(function(mark) {
-        var marker = new google.maps.Marker({position: mark["location"]});
-        marker.setMap(map);
-
-        infowindow = new google.maps.InfoWindow({content: mark["content"]});
-
-        google.maps.event.addListener(marker, 'click', function() {
-            infowindow.open(map,marker);
-        });
+    for (var i = 0; i < markers.length; i++) {
+        marker = new google.maps.Marker({
+        position: markers[i]["location"],
+        map: map
     });
+
+      google.maps.event.addListener(marker, 'click', (function(marker, i) {
+        return function() {
+            infowindow.setContent(markers[i]["content"]);
+            infowindow.open(map, marker);
+        }
+      })(marker, i));
+    }
 }
 
 function loadScript()
