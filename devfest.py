@@ -7,6 +7,8 @@ import urllib
 from markupsafe import Markup
 import sys
 import time
+from nlp import parser
+
 reload(sys)
 sys.setdefaultencoding("utf-8")
 
@@ -115,7 +117,12 @@ def createEvent():
     message = request.form['message']
     time = request.form['time']
     location = request.form['location']
-    event_created = Event(id = id, host = host, message = message, time = time, location = location)
+    
+    (tokens, actions_list) = parser(message)
+    if len(actions_list) == 0:
+        actions_list.append(message)
+    event_created = Event(id = id, host = host, message = actions_list[0] , time = time, location = location)
+
     try:
         db.session.add(event_created)
         db.session.commit()
