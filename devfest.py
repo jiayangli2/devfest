@@ -59,15 +59,31 @@ def urlencode_filter(s):
     return Markup(s)
 
 
+def get_all_events():
+    event_list = []
+    events = Event.query.all()
+    for e in events:
+        attendee_db = db.session.query(Event, Attend, User).filter(Event.eid == Attend.eid).filter(
+            Attend.username == User.username).all()
+        attendee = []
+        for p in attendee_db:
+            attendee.append(p.User.fullname)
+        res = requests.get('https://maps.googleapis.com/maps/api/geocode/json?address=' + e.location)
+        res = res.json()
+
+        event_list.append(
+            {'host': {'username': e.host, 'fullname': User.query.filter_by(username=e.host).first().fullname},
+             'location': e.location, 'get_location': res['results'][0]['geometry']['location'], 'message': e.message,
+             'time': e.time, 'eid': e.eid, 'attendee': attendee})
+    return event_list
+
+
 @app.route('/')
 def index():
 
     # DEBUG: this is debugging code to see what request looks like
     print (request.args)
-
-    #names = ["grace hopper", "alan turing", "ada lovelace"]
-    names = {"grace hopper":[123,"hi"], "alan turing":[456, "yeah"]}
-    context = dict(data = names)
+    context = {'events': get_all_events()}
 
     return render_template("index.html", **context)
 

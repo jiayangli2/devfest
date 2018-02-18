@@ -181,6 +181,7 @@
 .wizard {
     margin: 10px auto;
     margin-top: 0;
+    background-color: transparent;
 }
 
     .wizard .nav-tabs {
@@ -209,6 +210,7 @@
 .wizard .nav-tabs > li.active > a, .wizard .nav-tabs > li.active > a:hover, .wizard .nav-tabs > li.active > a:focus {
     color: #998E68;
     cursor: default;
+    background-color: transparent;
     border: 0;
     border-bottom-color: transparent;
 }
@@ -233,7 +235,7 @@ span.round-tab i{
 .wizard li.active span.round-tab {
     background: #fff;
     border: 2px solid crimson;
-    
+
 }
 .wizard li.active span.round-tab i{
     color: crimson;
@@ -330,21 +332,21 @@ span.round-tab i{
   background-color: rgba(9, 12, 25, 1);
   outline: 5px solid #090C19;
   outline-offset: 15px;
-  padding: 20px; 
+  padding: 20px;
   padding-top: 30px;
 }
 
 .title {
-    background-color: rgba(0, 0, 0, 0.2) !important; 
-    color: #fff; 
+    background-color: rgba(0, 0, 0, 0.2) !important;
+    color: #fff;
     padding: 25vh 0;
-    height: 100vh; 
-    width: 100%; 
+    height: 100vh;
+    width: 100%;
     margin: 0 auto;
     position: absolute;
     text-align: center;
     font-family: Book Antiqua, Palatino, Palatino Linotype;
-    font-size: 20px;
+    font-size: 18px;
 }
 
 .title p {
@@ -354,25 +356,190 @@ span.round-tab i{
     border: 5px solid #998E68;
 }
 
-.title group h4 {
+.title h3 {
     color: #998E68;
     padding: 10px 0 0 0;
 }
 
+/* search style */
+
+.searchbar {
+  margin: 25px 0;
+}
+
+.searchbar input {
+  height: 40px;
+  font-size: 25px;
+}
+
+.searchbar button {
+  background-color: crimson;
+  color: #fff;
+  height: 40px;
+  font-size: 20px;
+}
+
+.searchbar button:hover {
+  color: #090C19;
+  background-color: crimson;
+}
+
 /* map style */
 
-#googleMap { 
-  height: 100%; 
-  width: 100%; 
-  position: absolute; 
-  top: 0; 
-  left: 0; 
+#googleMap {
+  height: 100%;
+  width: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
   z-index: -1;
 }
 
 /* pop-up style */
 
-.firstHeading {
-  background-color: #000000;
+.placecard {
+  font-family: Book Antiqua, Palatino, Palatino Linotype;
+  width: 400px;
+  margin: -5px -20px 0 -10px !important;
 }
 
+.card {
+    padding-top: 20px;
+    margin: 10px 0 20px 0;
+    border-top-width: 0;
+    border-bottom-width: 2px;
+    -webkit-border-radius: 3px;
+    -moz-border-radius: 3px;
+    border-radius: 3%;
+}
+
+.card.hovercard {
+    position: relative;
+    padding-top: 0;
+    overflow: hidden;
+    background-color: transparent;
+}
+
+.card.hovercard .avatar {
+    position: relative;
+    font-size: 40px;
+    padding-top: 25px;
+    margin-left: 150px;
+    color: #fff;
+    text-align: center;
+    background-color: #090c19;
+    margin-bottom: -50px;
+}
+
+.card.hovercard .avatar {
+    width: 100px;
+    height: 100px;
+    max-width: 100px;
+    max-height: 100px;
+    -webkit-border-radius: 50%;
+    -moz-border-radius: 50%;
+    border-radius: 50%;
+    border: 5px solid #998e68;
+}
+
+.card.hovercard .info {
+    border-top: 20px solid #090c19;
+    padding: 20px 8px 10px;
+    background-color: #fff;
+}
+
+.card.hovercard .info .desc {
+    margin: 0 10%;
+}
+
+.card.hovercard .info .desc span {
+    padding: 9px;
+    width: 45px;
+    height: 45px;
+    line-height: 30px;
+    border-radius: 100px;
+    background: #fff;
+    border: 2px solid #090c19;
+    font-size: 20px;
+    margin: 7px;
+    left: 0;
+    display: inline-block;
+}
+
+.card.hovercard .info .desc p {
+    display: inline-block;
+    font-size: 18px;
+}
+
+.attend {
+  background-color: #090c19;
+  text-align: center;
+  padding: 10px 0 5px 0;
+}
+
+.attend h3 {
+  margin-top: 5px;
+  color: #fff;
+  padding: 0 8px;
+}
+
+.tags a {
+  width: 40px;
+  height: 40px;
+  border:2px solid #090C19;
+  display:inline-block;
+  color:#090c19;
+  background:#998e68;
+  -webkit-box-shadow:0 1px 1px 0 rgba(180,180,180,0.1);
+  box-shadow:0 1px 1px 0 rgba(180,180,180,0.1);
+  -webkit-transition:all .1s ease-in-out;
+  -moz-transition:all .1s ease-in-out;
+  -o-transition:all .1s ease-in-out;
+  -ms-transition:all .1s ease-in-out;
+  transition:all .1s ease-in-out;
+  border-radius:50%;
+  margin:0 10px 10px 0;
+  padding:10px 7px
+}
+
+.tags a:hover {
+  border-color:#fff;
+  background-color: crimson;
+  color: #fff;
+}
+
+.join {
+  background-color: #090c19;
+  text-align: center;
+  padding: 0 10px 10px 10px;
+}
+
+.join button {
+  width: 150px;
+}
+
+.placecard .tooltip {
+    background-color: #fff;
+    position: relative;
+    display: inline-block;
+    border-bottom: 1px dotted black;
+}
+
+.tooltip .tooltiptext {
+    visibility: hidden;
+    width: 120px;
+    background-color: black;
+    color: #fff;
+    text-align: center;
+    border-radius: 6px;
+    padding: 5px 0;
+    position: absolute;
+    z-index: 1;
+    bottom: 100%;
+    left: 50%;
+    margin-left: -60px;
+}
+
+.tooltip:hover .tooltiptext {
+    visibility: visible;
+}
