@@ -1,0 +1,2 @@
+pip3 install --upgrade google-cloud-language
+export GOOGLE_APPLICATION_CREDENTIALS="nlp/devfest-510f4cd9c4d9.json"

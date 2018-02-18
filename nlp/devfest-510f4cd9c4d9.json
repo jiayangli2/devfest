@@ -1,0 +1,12 @@
+{
+  "type": "service_account",
+  "project_id": "deft-justice-195521",
+  "private_key_id": "510f4cd9c4d9bd2bcb25f96e7754052b2ffa7c16",
+  "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvgIBADANBgkqhkiG9w0BAQEFAASCBKgwggSkAgEAAoIBAQDIr+pNXZs3/1Sv\nhuYERo+tKrQdNlFUFSEg6073QtX1CTgGIXIuBBUcLECr9+d5cWD4LyV/OAmOhKsN\nmgwQYe1nCgNVfJ9YPOLXEKOduOzrXgNZmEN0abgtKwrVidSHMzwYZw8W+Kheat/W\nTRHgaYJBHP6rZ7c3sq84ehFh1l0iYDy80/8goVFv5uMr38Sjit9LJwpgOqPxxGg4\nGpFmWq2cFgvhAKmJq+4aufxKEIPgrqqYvrr6lezoZE7fZELqEFtD3zg4sFTZE00V\nWO2rAgweFmLhMZlqvREs9y8iJjcZqBp+pGohuOwc2Asaz38sn4bJ9VDHny0q+wye\npqBXhWqnAgMBAAECggEATFyrkb6hdkBAj/2Lfmr+9ow+NrNZZN4ZWfZPeMREt1VH\nrQWC9cF16t9nyEevG0Wp+SWvZeYDtOgEUkugdYddlwx3Ukr2MtQQGHdrWnNoKvL9\n4VSPrjcf7ofnOnOUm9FB96MXWc1J+4s9GsT+nV5oQrBusvfm/lmOVLYV8R1pGM/K\nc0tX6LWPXsLjW7mXEttc2CBVBu7OJrTtQsnN4HpWRCgPYPtgcNpT1qRCLUyiuJfw\nx/emAgVKTzdJE5bi7s0tSOnVn95fyy4KGBBRhMI+/P4yGnm7hxI448awcvgEXQIb\n6Dc3OHdQ1kPOQulxbk00V58llQN/uSpxaDQNqlJG8QKBgQD4f5XwC7BlUt1gbKXu\nJiN+XixV7z+EFhdXmlzUfiXC9nD9Wf4fukU1pyFPAeC858Z5EDhtHQ17cg1kbasj\nzsU24NCmOzuzWg2NJrg0H1CBNZVRmdgDw6uDkjEJfAD160GSHzKwM/ZJJx239oEa\nI5QajU1AlBA8fV8AzbyNDlCVLwKBgQDOvtdDwWSD5BmYm2NoC4fCnveXvDii/TQc\n3cTLRCAHNj8XM5zMmPlXQS4Bjx2OG3ckUnMrOLDbRxRhM3tGSM0OSzqF8OPiswVT\ndj76OunvhYTNo+ihEf172DrWPvqgl4yJrvuiLUJsScSV0lDVnQ0pUMXH6FGn1cH2\nX9IgXF+UCQKBgQCfbUuGzBkJiJZazJnQJkvTQRv0rh/z4DBtla1E7wHPCUkIYfo1\n5M2OVIF8LNpAl/qvpQZuipshvdR1wB5yRLAmOynh3FK7CGV1T4gSeJyvqO75gVgj\nYh/hs6MeUJ5VJ+/TjYx5m3zBBgV9BvthB753InyTl+qqxEx1OYlkffCZJQKBgQCB\nmUvjo0VZEBGjgjSsMh4mN/RI36o5MbQLLFGCge/51V1zM91ku7gBpFAslgQW4syq\nriyXuW/T5Ri3Xcg25Mf1396Nu9V+dG4wRX1w6qFejjoTll3rKhXWHlOzncMKDDYC\n0PfYT7rFmvBqYm5dmZd4gLOaft1A8lQmFybnNkCL0QKBgHxJINa4ApMeLwcRRUUU\noJWMFG6veXgawU3IGxZalfxkl45X6Pinvq77zs1J6d3dSfmbLPPtYejmb4bxmjgN\nAJQ/yGaDb825U7Wt5HDDOzePNl3KC9XTwi+4RebOqJx/VtHzXKGtU9Hul7AAn0HG\nRkX2YcJ+5gFhfOfo1B0nswgZ\n-----END PRIVATE KEY-----\n",
+  "client_email": "devfest@deft-justice-195521.iam.gserviceaccount.com",
+  "client_id": "111728437240691229900",
+  "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+  "token_uri": "https://accounts.google.com/o/oauth2/token",
+  "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+  "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/devfest%40deft-justice-195521.iam.gserviceaccount.com"
+}
