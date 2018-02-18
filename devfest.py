@@ -9,6 +9,7 @@ import sys
 import time
 import requests
 from nlp import parser
+import string
 
 reload(sys)
 sys.setdefaultencoding("utf-8")
@@ -75,16 +76,46 @@ def get_all_events():
             event_list.append(
                 {'host': {'username': e.host, 'fullname': User.query.filter_by(username=e.host).first().fullname},
                  'location': e.location, 'get_location': res['results'][0]['geometry']['location'], 'message': e.message,
-                 'time': e.time, 'eid': e.eid, 'attendee': attendee})    
+                 'time': e.time, 'eid': e.eid, 'attendee': attendee})
+    return event_list
+
+
+def get_events(keywords):
+    event_list = []
+    events = Event.query.all()
+    for e in events:
+        relevant = False
+        for k in keywords:
+            if k.lower() in e.message.lower():
+                relevant = True
+                break
+        if relevant:
+            attendee_db = db.session.query(Attend, User).filter(
+                Attend.username == User.username).filter(Attend.eid == e.eid).all()
+            attendee = []
+            for p in attendee_db:
+                attendee.append(p.User.fullname)
+            res = requests.get('https://maps.googleapis.com/maps/api/geocode/json?address=' + e.location)
+            res = res.json()
+
+            if len(res['results']) != 0:
+                event_list.append(
+                    {'host': {'username': e.host, 'fullname': User.query.filter_by(username=e.host).first().fullname},
+                     'location': e.location, 'get_location': res['results'][0]['geometry']['location'], 'message': e.message,
+                     'time': e.time, 'eid': e.eid, 'attendee': attendee})
     return event_list
 
 
 @app.route('/')
 def index():
-
     # DEBUG: this is debugging code to see what request looks like
     print (request.args)
-    context = {'events': get_all_events()}
+    search_arg = request.args.get('q')
+    if search_arg is not None:
+        keywords = search_arg.strip().translate(string.punctuation).split(' ')
+        context = {'events': get_events(keywords)}
+    else:
+        context = {'events': get_all_events()}
     session['createEvent'] = False
     return render_template("index.html", **context)
 
