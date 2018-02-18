@@ -235,7 +235,7 @@ span.round-tab i{
 .wizard li.active span.round-tab {
     background: #fff;
     border: 2px solid crimson;
-    
+
 }
 .wizard li.active span.round-tab i{
     color: crimson;
@@ -332,16 +332,16 @@ span.round-tab i{
   background-color: rgba(9, 12, 25, 1);
   outline: 5px solid #090C19;
   outline-offset: 15px;
-  padding: 20px; 
+  padding: 20px;
   padding-top: 30px;
 }
 
 .title {
-    background-color: rgba(0, 0, 0, 0.2) !important; 
-    color: #fff; 
+    background-color: rgba(0, 0, 0, 0.2) !important;
+    color: #fff;
     padding: 25vh 0;
-    height: 100vh; 
-    width: 100%; 
+    height: 100vh;
+    width: 100%;
     margin: 0 auto;
     position: absolute;
     text-align: center;
@@ -386,12 +386,12 @@ span.round-tab i{
 
 /* map style */
 
-#googleMap { 
-  height: 100%; 
-  width: 100%; 
-  position: absolute; 
-  top: 0; 
-  left: 0; 
+#googleMap {
+  height: 100%;
+  width: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
   z-index: -1;
 }
 
