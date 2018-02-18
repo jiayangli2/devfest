@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/map.css') }}">
+    {% block head_css_block %}{% endblock %}
+	<script src="{{ url_for('static', filename='js/map.js') }}"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    {% block head_js_block %}{% endblock %}
+</head>
+ 
+<body>
+	<nav class="navbar navbar-default navbar-fixed-top">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="index.html">Devfest</a>
+            </div>
+            
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav navbar-left">
+                    <li class="focus"><a href="index.html"><p>Home</p><span class="sr-only">(current)</span></a></li>
+                    <li><a href="tree.html"><p>Tree</p></a></li>
+                    <li><a href="statistics.html"><p>Statistics</p></a></li>
+                    <li><a href="people.html"><p>People</p></a></li>
+                </ul>
+                
+                <ul class="nav navbar-nav navbar-right">
+                    <button class="btn login" data-toggle="modal" data-target="#signInModal">Sign In</button>
+                    <button class="btn register" data-toggle="modal" data-target="#signUpModal">Sign Up</button>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    {% block body_block %}{% endblock %}
+    {% block body_js_block %}{% endblock %}
+</body>
+</html>

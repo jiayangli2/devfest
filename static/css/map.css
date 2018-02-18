@@ -1,0 +1,173 @@
+.navbar-default {
+    background-color: rgba(255, 255, 255, 0.8) !important;
+    background-image: none;
+    background-repeat: no-repeat;
+    padding-right: 70px;
+    border: none;
+    box-shadow: none;
+ }
+
+.navbar-brand {
+    font-weight: 600;
+    padding: 30px !important;
+    text-transform: uppercase;
+    font-family: Book Antiqua, Palatino, Palatino Linotype;
+    color: #663500 !important;
+    font-size: 25px !important;
+    text-decoration: overline;
+}
+
+.navbar li a {
+    color: #663500 !important;
+    height: inherit;
+    font-family: Book Antiqua, Palatino, Palatino Linotype;
+    font-size: 20px;
+    border-top: 3px solid transparent;
+}
+
+.navbar li a p {
+    margin: 0;
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+
+.user a {
+    padding: 0 !important;
+    font-size: 20px !important;
+    padding-top: 10px !important;
+}
+
+.user img {
+    width: 50px;
+    height: 50px;
+    border: 3px solid white;
+    margin-right: 5px;
+}
+
+.navbar li a:hover {
+    color: crimson !important;
+    border-top: 3px solid crimson;
+}
+
+.focus a {
+    border-top: 3px solid crimson !important;
+}
+
+.focus a p {
+    color: crimson !important;
+}
+
+.navbar button {
+    border-radius: 30px !important;
+    font-family: Book Antiqua, Palatino, Palatino Linotype;
+    font-size: 20px;
+    padding: 10px;
+    padding-left: 20px;
+    padding-right: 20px;
+    margin-top: 12px !important;
+}
+
+.login {
+    border: 2px solid #663500 !important;
+    color: #663500 !important;
+    background-color: transparent !important;
+}
+
+.register {
+    background-color: #663500 !important;
+    color: white !important;
+}
+
+/* form style */
+
+.registerform {
+    background-color: transparent; 
+    color: darkslategray; 
+    padding-top: 5vh !important;
+    margin: 0 auto;
+    position: absolute;
+    text-align: center;
+    font-family: Book Antiqua, Palatino, Palatino Linotype;
+    font-size: 20px;
+}
+
+.modal-content {
+    border-radius: 50px !important;
+}
+
+.modal-title {
+    font-size: 30px;
+    color: #663500;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+.modal-header {
+    border-radius: 10px 10px 0 0;
+    background-color: #F6F2EE;
+}
+
+.modal-body {
+    margin: 40px;
+}
+
+.modal-footer {
+    border-radius: 0 0 10px 10px;
+    background-color: #F6F2EE;
+}
+
+.form-group label, .form-group input {
+    padding: 0;
+    font-size: 20px;
+    font-family: Book Antiqua, Palatino, Palatino Linotype;
+}
+
+.form-group input {
+    padding-left: 5px;
+}
+
+.radio {
+    text-align: left;
+    padding-top: 0 !important;
+}
+
+.row-footer {
+    padding: 10px;
+    padding-top: 60px;
+    color: white;
+    background-color: #34495e;
+    letter-spacing: 0.5px;
+    font-family: Book Antiqua, Palatino, Palatino Linotype;
+}
+
+.row-footer p {
+    font-family: Book Antiqua, Palatino, Palatino Linotype;
+    font-size: 22px;
+}
+
+.row-footer li a {
+    margin-top: 50px;
+    font-size: 18px;
+    color: #FFC266;
+}
+
+.row-footer li a:hover {
+    color: whitesmoke;
+    text-decoration: none;
+}
+
+.nav .btn {
+    color: #34495e;
+    margin: 5px;
+    background-color: white;
+    border-radius: 20px;
+}
+
+#googleMap { 
+  height: 100%; 
+  width: 100%; 
+  position: absolute; 
+  top: 0; 
+  left: 0; 
+  z-index: 0;
+}
