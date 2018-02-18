@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<script type="text/javascript" src="js/map.js" ></script>
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb" crossorigin="anonymous">
+  	<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
+</head>
+<script>
+	$(document).ready(function(){
+		var url = " ";
+		$.ajax({
+			type: 'GET',
+			url: url,
+			data: {group_name, csrfmiddlewaretoken:'{{ csrf_token}}'},
+			dataType: 'json',
+			success: function(data){
+				$("#admin-name").append(data['admin']);
+				var count = data['member'].length;
+				for (var i = 0; i < count; ++i)
+					$("ol").append("<li>" + data['member'][i]+ "</li>");
+			}
+		});
+	}
+</script>
+<body>
+
+<div id="googleMap" style="width:100%;height:400px;"></div>
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD2j3UtPj-H-gFPihk9vmVVaGpA26uBbJQ&callback=myMap"></script>
+	
+</body>
+</html>
+
