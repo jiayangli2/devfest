@@ -1,6 +1,7 @@
 from flask import Flask, request, render_template, g, redirect, Response, session, escape, url_for
 from flask_sqlalchemy import SQLAlchemy
 import os
+import hashlib, uuid
 from helper import populate
 
 app = Flask(__name__)
@@ -8,6 +9,8 @@ app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:////home/prokingsley/devfest/app
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = True
 
 db = SQLAlchemy(app)
+salt = uuid.uuid4().hex
+
 
 class User(db.Model):
     username = db.Column(db.String(80), primary_key=True, nullable=False)
@@ -37,27 +40,28 @@ def index():
 @app.route('/login', methods=['POST'])
 def login():
     uname = request.form['username']
-    pwd = request.form['password']
+    pwd = hashlib.sha512(request.form['password'] + salt).hexdigest()
     try:
         temp = User.query.filter_by(username=uname).first()
         if temp == None or temp.password != pwd:
             err_msg = "incorrect username or password"
             context = dict(data = err_msg)
-            render_template("index.html", **context)
+            print ("no such user")
+            return render_template("index.html", **context)
         else:
             populate(session, temp)
             return redirect(url_for('index'))
     except:
         err_msg = "connection to DB failed"
         context = dict(data = err_msg)
-        render_template("index.html", **context)
+        return render_template("index.html", **context)
 
 @app.route('/signup', methods=['POST'])
 def signup():
     if request.method == 'POST':
         print ("hello world!")
         uname = request.form['username']
-        pwd = request.form['password']
+        pwd = hashlib.sha512(request.form['password'] + salt).hexdigest()
         fname = request.form['fullname']
         email = request.form['email']
         phone = request.form['phone']
