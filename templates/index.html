@@ -160,7 +160,7 @@ $().ready(function() {
         </div>
     </section>
 
-    {% if session.username is defined and session.username != None %}
+    {% if session.username is defined and session.username != None and session.createEvent %}
     <section id="momentum" class="container-fluid main">
         <div class="row row-content">
             <div class="col-xs-12 title">
@@ -277,11 +277,13 @@ function initialize()
                         '<div class="tags">'+
                             '<a href=" ">YH</a>'+
                         '</div>'+
-                    '</div>'+
-                    '<div class="join">'+
-                        '<button type="button" class="btn btn-success">JOIN</button>'+
-                    '</div>'+
-                '</div>'+
+                    '</div>'
+                    {% if session.username is defined and session.username != None %}
+                    +'<div class="join">'+
+                        '<a href="/attend/{{ entry.eid }}/{{ session.username }}"><button type="button" class="btn btn-success">JOIN</button></a>'+
+                    '</div>'
+                    {% endif %}
+                +'</div>'+
             '</div>'
         });
     {% endfor %}
