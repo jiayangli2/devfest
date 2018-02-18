@@ -1,1 +1,0 @@
-# Cupid - DevFest 2018
