@@ -71,10 +71,11 @@ def get_all_events():
         res = requests.get('https://maps.googleapis.com/maps/api/geocode/json?address=' + e.location)
         res = res.json()
 
-        event_list.append(
-            {'host': {'username': e.host, 'fullname': User.query.filter_by(username=e.host).first().fullname},
-             'location': e.location, 'get_location': res['results'][0]['geometry']['location'], 'message': e.message,
-             'time': e.time, 'eid': e.eid, 'attendee': attendee})
+        if len(res['results']) != 0:
+            event_list.append(
+                {'host': {'username': e.host, 'fullname': User.query.filter_by(username=e.host).first().fullname},
+                 'location': e.location, 'get_location': res['results'][0]['geometry']['location'], 'message': e.message,
+                 'time': e.time, 'eid': e.eid, 'attendee': attendee})    
     return event_list
 
 
@@ -155,7 +156,7 @@ def createEvent():
         context = dict(data = err_msg)
         return render_template("index.html", **context)
     print ("Create Event Succeeded!")
-    return redirect(url_for('/'))
+    return redirect(url_for('index'))
 
 @app.route('/events', methods=['GET'])
 def renderJSON():
