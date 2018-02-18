@@ -1,7 +1,7 @@
 from flask import Flask, request, render_template, g, redirect, Response, session, escape, url_for
 from flask_sqlalchemy import SQLAlchemy
 import os
-import hashlib, uuid
+import hashlib
 from helper import populate
 import urllib
 from markupsafe import Markup
@@ -11,7 +11,7 @@ app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///./app.db'#/home/prokingsley/d
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = True
 
 db = SQLAlchemy(app)
-salt = uuid.uuid4().hex
+salt = 'cdea050d7d604afea194572ef22d5297'
 
 
 class User(db.Model):
@@ -63,7 +63,7 @@ def index():
 @app.route('/login', methods=['POST'])
 def login():
     uname = request.form['username']
-    pwd = hashlib.sha512(request.form['password']).hexdigest()
+    pwd = hashlib.sha512(request.form['password'] + salt).hexdigest()
     try:
         temp = User.query.filter_by(username=uname).first()
         if temp == None or temp.password != pwd:
@@ -85,7 +85,7 @@ def signup():
     if request.method == 'POST':
         print ("hello world!")
         uname = request.form['username']
-        pwd = hashlib.sha512(request.form['password']).hexdigest()
+        pwd = hashlib.sha512(request.form['password'] + salt).hexdigest()
         fname = request.form['fullname']
         email = request.form['email']
         phone = request.form['phone']
@@ -117,4 +117,4 @@ def logout():
 app.secret_key = 'A0Zr98j/3yX R~XHH!jmN]LWX/,?RT'
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run(host='0.0.0.0',debug=True)
