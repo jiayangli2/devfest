@@ -32,16 +32,21 @@ class User(db.Model):
 
 
 class Event(db.Model):
-    id = db.Column(db.String(80), primary_key=True, nullable=False)
+    eid = db.Column(db.String(80), primary_key=True, nullable=False)
     host = db.Column(db.String(80), nullable=False)
     message = db.Column(db.String(300), nullable=False)
     time = db.Column(db.String(80), nullable=False)
     location = db.Column(db.String(80), nullable=False)
+    def __repr__(self):
+        return '<Event %r>' % self.message
 
 
 class Attend(db.Model):
-    id = db.Column(db.String(80), db.ForeignKey('event.id'), primary_key=True)
+    eid = db.Column(db.String(80), db.ForeignKey('event.eid'), primary_key=True)
     username = db.Column(db.String(80), primary_key=True, nullable=False)
+    def __repr__(self):
+        return '<eid %r>' % self.eid
+
 
 
 @app.template_filter('urlencode')
@@ -112,20 +117,22 @@ def signup():
 
 @app.route('/event', methods=['POST'])
 def createEvent():
-    id = "%.3f" % time.time()
+    eid = "%.3f" % (time.time())
     host = request.form['host']
     message = request.form['message']
-    time = request.form['time']
+    event_time = request.form['time']
     location = request.form['location']
     
     (tokens, actions_list) = parser(message)
     if len(actions_list) == 0:
         actions_list.append(message)
-    event_created = Event(id = id, host = host, message = actions_list[0] , time = time, location = location)
+
+    event_created = Event(eid = eid, host = host, message = actions_list[0] , time = event_time, location = location)
 
     try:
         db.session.add(event_created)
         db.session.commit()
+        print ("sdiuhqwiudhiwqdhiuahd")
     except:
         err_msg = "Create Event Failed!"
         context = dict(data = err_msg)
@@ -133,9 +140,9 @@ def createEvent():
     print ("Create Event Succeeded!")
     return redirect(url_for('events'))
 
-@app.route('/attend/<id>/<username>', methods=['POST'])
+@app.route('/attend/<eid>/<username>', methods=['POST'])
 def attendEvent():
-    attend_event = Attend(id=id, username=username)
+    attend_event = Attend(eid=eid, username=username)
     try:
         db.session.add(attend_event)
         db.session.commit()
@@ -156,4 +163,5 @@ def logout():
 app.secret_key = 'A0Zr98j/3yX R~XHH!jmN]LWX/,?RT'
 
 if __name__ == '__main__':
+    db.create_all()
     app.run(host='0.0.0.0',debug=True)
