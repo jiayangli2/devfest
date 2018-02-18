@@ -3,10 +3,8 @@ from flask_sqlalchemy import SQLAlchemy
 import os
 import hashlib, uuid
 from helper import populate
-try:
-    from urllib import quote  # Python 2
-except ImportError:
-    from urllib.parse import quote  # Python 3
+import urllib
+from markupsafe import Markup
 
 app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///./app.db'#/home/prokingsley/devfest/app.db' 
@@ -30,7 +28,11 @@ class User(db.Model):
 
 @app.template_filter('urlencode')
 def urlencode_filter(s):
-    return quote(s, safe='')
+    if type(s) == 'Markup':
+        s = s.unescape()
+    s = s.encode('utf8')
+    s = urllib.quote_plus(s)
+    return Markup(s)
 
 @app.route('/')
 def index():
