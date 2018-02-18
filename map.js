@@ -5,20 +5,21 @@ function initialize()
         zoom: 15,};
     var map = new google.maps.Map(document.getElementById("googleMap"), mapProp);
 
-    var json = [
+    var json = 
+    [
       {
         "attendee": [
-          {
-            "fullname": "Trading Hudson", 
-            "username": "hrt2"
-          }
+          "Trading Hudson"
         ], 
         "eid": "1518934937.912", 
         "get_location": {
           "lat": 40.758895, 
           "lng": -73.985131
         }, 
-        "host": "hrt2", 
+        "host": {
+          "fullname": "Trading Hudson", 
+          "username": "hrt2"
+        }, 
         "location": "Times Square", 
         "message": "Watch Fifty Shades", 
         "time": "Feb 18 8 PM"
@@ -28,10 +29,17 @@ function initialize()
     var markers = [];
 
     json.forEach(function(entry) {
+
+        var ini = entry["host"].fullname.split(" ");
+        var initial = "";
+        ini.forEach(function(i) {
+            initial += i.charAt(0);
+        });
+
         var contentString = 
             '<div class="placecard">'+
                 '<div class="card hovercard">'+
-                    '<div class="avatar">'+entry["host"]+'</div>'+
+                    '<div class="avatar">'+initial+'</div>'+
                     '<div class="info">'+
                         '<div class="desc">'+
                             '<span><i class="glyphicon glyphicon-glass"></i></span>'+
@@ -49,10 +57,7 @@ function initialize()
                     '<div class="attend">'+
                         '<h3>Attendees</h3>'+
                         '<div class="tags">'+
-                            '<a href=" " title="999-111-1234">YJ</a>'+
-                            '<a href=" " title="999-111-1234">BO</a>'+
-                            '<a href=" " title="999-111-1234">NP</a>'+
-                            '<a href=" " title="999-111-1234">YH</a>'+
+                            '<a href=" ">YH</a>'+
                         '</div>'+
                     '</div>'+
                     '<div class="join">'+
@@ -61,27 +66,21 @@ function initialize()
                 '</div>'+
             '</div>';
 
-        let y1 = 40.758895;
-        let y2 = entry["get_location"].lng;
-        console.log(entry["get_location"].lat == 40.758895, entry["get_location"].lng == -73.985131);
-        // var mapProp = {
-        // center: new google.maps.LatLng(entry["get_location"]["lat"], entry["get_location"]["lng"]),
-        // zoom: 15,};
-        markers.push({"location" : new google.maps.LatLng(y1, y2), "content" : contentString});
+        markers.push({"location" : new google.maps.LatLng(entry["get_location"].lat, entry["get_location"].lng), "content" : contentString});
     });
 
     var infowindow;
 
-    for(var i=0;i<markers.length;i++){
-        var marker = new google.maps.Marker({position: markers[i]["location"]});
+    markers.forEach(function(mark) {
+        var marker = new google.maps.Marker({position: mark["location"]});
         marker.setMap(map);
 
-        infowindow = new google.maps.InfoWindow({content: markers[i]["content"]});
+        infowindow = new google.maps.InfoWindow({content: mark["content"]});
 
         google.maps.event.addListener(marker, 'click', function() {
             infowindow.open(map,marker);
         });
-    };
+    });
 }
 
 function loadScript()
