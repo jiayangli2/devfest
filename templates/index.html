@@ -1,6 +1,7 @@
 {% extends "layout.html" %}
 {% block head_js_block %}
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.17.0/jquery.validate.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/chrono-node@latest/chrono.min.js"></script>
 <script>
 $().ready(function() {
 // 在键盘按下并释放及提交后验证提交表单
@@ -187,7 +188,7 @@ $().ready(function() {
 				                        </a>
 				                    </li>
 				                    <li role="presentation" class="disabled">
-				                        <a href="#step3" data-toggle="tab" aria-controls="step3" role="tab" title="Whenh">
+				                        <a href="#step3" data-toggle="tab" aria-controls="step3" role="tab" title="When">
 				                            <span class="round-tab">
 				                                <i class="glyphicon glyphicon-calendar"></i>
 				                            </span>
@@ -215,7 +216,8 @@ $().ready(function() {
 				                        </ul>
 				                    </div>
 				                    <div class="tab-pane" role="tabpanel" id="step3">
-				                        <input class="form-control" id="time" name="time" placeholder="Type the date and time you want to go"></input>
+				                        <input class="form-control" id="inputTime" name="inputTime" placeholder="Type the date and time you want to go"></input>
+                                        <input class="hidden" id="time" name="time">
 				                        <ul class="list-inline pull-right">
 				                            <li><button type="button" class="btn btn-default prev-step">Previous</button></li>
 				                            <li><button type="button" class="btn btn-default next-step">Skip</button></li>
@@ -230,6 +232,13 @@ $().ready(function() {
 			</div>
         </div>
     </section>
+    <script>
+        $('#createEventForm').submit(function() {
+            var result = chrono.parse($('#createEventForm #inputTime').val());
+            $('#createEventForm #time').val(result[0].start.date());
+            alert($('#createEventForm #time').val());
+        });
+    </script>
     {% endif %}
 
 	<div id="googleMap"></div>
