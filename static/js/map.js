@@ -1,74 +1,87 @@
-var map;
-var mapProp;
-
 function initialize()
 {
-    mapProp = {
+    var mapProp = {
         center: new google.maps.LatLng(40.808349, -73.962162),
         zoom: 15,};
-    map = new google.maps.Map(document.getElementById("googleMap"), mapProp);
+    var map = new google.maps.Map(document.getElementById("googleMap"), mapProp);
 
+    var json = [
+      {
+        "attendee": [
+          {
+            "fullname": "Trading Hudson", 
+            "username": "hrt2"
+          }
+        ], 
+        "eid": "1518934937.912", 
+        "get_location": {
+          "lat": 40.758895, 
+          "lng": -73.985131
+        }, 
+        "host": "hrt2", 
+        "location": "Times Square", 
+        "message": "Watch Fifty Shades", 
+        "time": "Feb 18 8 PM"
+      }
+    ];
 
     var markers = [];
 
-    var contentString1 = 
-      '<div id="content">'+
-      '<div id="siteNotice">'+
-      '</div>'+
-      '<h1 id="firstHeading" class="firstHeading">djcgcgfcch</h1>'+
-      '<div id="bodyContent">'+
-      '<p><b>Uluru</b>, also referred to as <b>Ayers Rock</b>, is a large ' +
-      'sandstone rock formation in the southern part of the '+
-      'Northern Territory, central Australia. It lies 335&#160;km (208&#160;mi) '+
-      'south west of the nearest large town, Alice Springs; 450&#160;km '+
-      '(280&#160;mi) by road. Kata Tjuta and Uluru are the two major '+
-      'features of the Uluru - Kata Tjuta National Park. Uluru is '+
-      'sacred to the Pitjantjatjara and Yankunytjatjara, the '+
-      'Aboriginal people of the area. It has many springs, waterholes, '+
-      'rock caves and ancient paintings. Uluru is listed as a World '+
-      'Heritage Site.</p>'+
-      '<p>Attribution: Uluru, <a href="https://en.wikipedia.org/w/index.php?title=Uluru&oldid=297882194">'+
-      'https://en.wikipedia.org/w/index.php?title=Uluru</a> '+
-      '(last visited June 22, 2009).</p>'+
-      '</div>'+
-      '</div>';
+    json.forEach(function(entry) {
+        var contentString = 
+            '<div class="placecard">'+
+                '<div class="card hovercard">'+
+                    '<div class="avatar">'+entry["host"]+'</div>'+
+                    '<div class="info">'+
+                        '<div class="desc">'+
+                            '<span><i class="glyphicon glyphicon-glass"></i></span>'+
+                            '<p>'+entry["message"]+'</p>'+
+                        '</div>'+
+                        '<div class="desc">'+
+                            '<span><i class="glyphicon glyphicon-map-marker"></i></span>'+
+                            '<p>'+entry["location"]+'</p>'+
+                        '</div>'+
+                        '<div class="desc">'+
+                            '<span><i class="glyphicon glyphicon-calendar"></i></span>'+
+                            '<p>'+entry["time"]+'</p>'+
+                        '</div>'+
+                    '</div>'+
+                    '<div class="attend">'+
+                        '<h3>Attendees</h3>'+
+                        '<div class="tags">'+
+                            '<a href=" " title="999-111-1234">YJ</a>'+
+                            '<a href=" " title="999-111-1234">BO</a>'+
+                            '<a href=" " title="999-111-1234">NP</a>'+
+                            '<a href=" " title="999-111-1234">YH</a>'+
+                        '</div>'+
+                    '</div>'+
+                    '<div class="join">'+
+                        '<button type="button" class="btn btn-success">JOIN</button>'+
+                    '</div>'+
+                '</div>'+
+            '</div>';
 
-    var contentString2 = 
-      '<div id="content">'+
-      '<div id="siteNotice">'+
-      '</div>'+
-      '<h1 id="firstHeading" class="firstHeading">fftft</h1>'+
-      '<div id="bodyContent">'+
-      '<p><b>Uluru</b>, also referred to as <b>Ayers Rock</b>, is a large ' +
-      'sandstone rock formation in the southern part of the '+
-      'Northern Territory, central Australia. It lies 335&#160;km (208&#160;mi) '+
-      'south west of the nearest large town, Alice Springs; 450&#160;km '+
-      '(280&#160;mi) by road. Kata Tjuta and Uluru are the two major '+
-      'features of the Uluru - Kata Tjuta National Park. Uluru is '+
-      'sacred to the Pitjantjatjara and Yankunytjatjara, the '+
-      'Aboriginal people of the area. It has many springs, waterholes, '+
-      'rock caves and ancient paintings. Uluru is listed as a World '+
-      'Heritage Site.</p>'+
-      '<p>Attribution: Uluru, <a href="https://en.wikipedia.org/w/index.php?title=Uluru&oldid=297882194">'+
-      'https://en.wikipedia.org/w/index.php?title=Uluru</a> '+
-      '(last visited June 22, 2009).</p>'+
-      '</div>'+
-      '</div>';
+        let y1 = 40.758895;
+        let y2 = entry["get_location"].lng;
+        console.log(entry["get_location"].lat == 40.758895, entry["get_location"].lng == -73.985131);
+        // var mapProp = {
+        // center: new google.maps.LatLng(entry["get_location"]["lat"], entry["get_location"]["lng"]),
+        // zoom: 15,};
+        markers.push({"location" : new google.maps.LatLng(y1, y2), "content" : contentString});
+    });
 
-    markers.push({"name" : "Bill", "location" : new google.maps.LatLng(40.8083490, -73.962162), "content" : contentString1});
-    markers.push({"name" : "Lily", "location" : new google.maps.LatLng(40.8073491, -73.964163), "content" : contentString2});
+    var infowindow;
 
-    markers.forEach(function(element) {
-        var marker = new google.maps.Marker({position: element["location"]});
+    for(var i=0;i<markers.length;i++){
+        var marker = new google.maps.Marker({position: markers[i]["location"]});
         marker.setMap(map);
 
-        var infowindow = new google.maps.InfoWindow({content: element["content"]});
+        infowindow = new google.maps.InfoWindow({content: markers[i]["content"]});
 
         google.maps.event.addListener(marker, 'click', function() {
             infowindow.open(map,marker);
         });
-    });
-
+    };
 }
 
 function loadScript()
