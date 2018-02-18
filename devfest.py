@@ -1,4 +1,4 @@
-from flask import Flask, request, render_template, g, redirect, Response, session, escape, url_for
+from flask import Flask, request, render_template, g, redirect, Response, session, escape, url_for, jsonify
 from flask_sqlalchemy import SQLAlchemy
 import os
 import hashlib
@@ -7,6 +7,7 @@ import urllib
 from markupsafe import Markup
 import sys
 import time
+import requests
 from nlp import parser
 
 reload(sys)
@@ -140,8 +141,24 @@ def createEvent():
     print ("Create Event Succeeded!")
     return redirect(url_for('events'))
 
-@app.route('/attend/<eid>/<username>', methods=['POST'])
-def attendEvent():
+@app.route('/events', methods=['GET'])
+def renderJSON():
+    event_list = []
+    events = Event.query.all() 
+    for e in events:
+        attendee_db = db.session.query(Event, Attend, User).filter(Event.eid == Attend.eid).filter(Attend.username == User.username).all()
+        attendee = []
+        for p in attendee_db:
+            attendee.append({'fullname':p.User.fullname, 'username':p.Attend.username})
+        res = requests.get('https://maps.googleapis.com/maps/api/geocode/json?address=' + e.location)
+        res = res.json()
+        event_list.append({'host' : e.host,'location' : e.location, 'get_location' : res['results'][0]['geometry']['location'], 'message' : e.message, 'time' : e.time, 'eid' : e.eid, 'attendee':attendee})
+    return jsonify(event_list)
+
+
+
+@app.route('/attend/<eid>/<username>', methods=['GET'])
+def attendEvent(eid, username):
     attend_event = Attend(eid=eid, username=username)
     try:
         db.session.add(attend_event)
