@@ -23,6 +23,18 @@ class User(db.Model):
     def __repr__(self):
         return '<User %r>' % self.username
 
+class Event(db.Model):
+    id = db.Column(db.String(80), primary_key=True, nullable=False)
+    host = db.Column(db.String(80), nullable=False)
+    message = db.Column(db.String(300), nullable=False)
+    time = db.Column(db.String(80), nullable=False)
+    location = db.Column(db.String(80), nullable=False)
+
+
+class Attend(db.Model):
+    id = db.Column(db.String(80), db.ForeignKey('event.id'), primary_key=True)
+    username = db.Column(db.String(80), primary_key=True, nullable=False)
+
 
 
 @app.route('/')
