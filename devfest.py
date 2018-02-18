@@ -6,6 +6,7 @@ from helper import populate
 import urllib
 from markupsafe import Markup
 import sys
+import time
 reload(sys)
 sys.setdefaultencoding("utf-8")
 
@@ -97,18 +98,46 @@ def signup():
         try:
             db.session.add(user_created)
             db.session.commit()
-            print ("db")
         except:
             err_msg = "Signing up failed!"
             context = dict(data = err_msg)
             return render_template("index.html", **context)
         populate(session, user_created)
-        print ("2")
         return redirect(url_for('index'))
     err_msg = "HTTP Request not supported!"
     context = dict(data = err_msg)
     return render_template("index.html", **context)
 
+@app.route('/event', methods=['POST'])
+def createEvent():
+    id = "%.3f" % time.time()
+    host = request.form['host']
+    message = request.form['message']
+    time = request.form['time']
+    location = request.form['location']
+    event_created = Event(id = id, host = host, message = message, time = time, location = location)
+    try:
+        db.session.add(event_created)
+        db.session.commit()
+    except:
+        err_msg = "Create Event Failed!"
+        context = dict(data = err_msg)
+        return render_template("index.html", **context)
+    print ("Create Event Succeeded!")
+    return redirect(url_for('events'))
+
+@app.route('/attend/<id>/<username>', methods=['POST'])
+def attendEvent():
+    attend_event = Attend(id=id, username=username)
+    try:
+        db.session.add(attend_event)
+        db.session.commit()
+    except:
+        err_msg = "Join Event Failed!"
+        context = dict(data = err_msg)
+        return render_template("index.html", **context)
+    print ("Attend Event Succeeded!")
+    return redirect(url_for('events'))
 
 @app.route('/logout')
 def logout():
