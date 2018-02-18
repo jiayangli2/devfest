@@ -63,8 +63,8 @@ def get_all_events():
     event_list = []
     events = Event.query.all()
     for e in events:
-        attendee_db = db.session.query(Event, Attend, User).filter(Event.eid == Attend.eid).filter(
-            Attend.username == User.username).all()
+        attendee_db = db.session.query(Attend, User).filter(
+            Attend.username == User.username).filter(Attend.eid == e.eid).all()
         attendee = []
         for p in attendee_db:
             attendee.append(p.User.fullname)
@@ -163,7 +163,7 @@ def renderJSON():
     event_list = []
     events = Event.query.all() 
     for e in events:
-        attendee_db = db.session.query(Event, Attend, User).filter(Event.eid == Attend.eid).filter(Attend.username == User.username).all()
+        attendee_db = db.session.query(Attend, User).filter(Attend.username == User.username).filter(e.eid == Attend.eid).all()
         attendee = []
         for p in attendee_db:
             attendee.append(p.User.fullname)
