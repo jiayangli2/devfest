@@ -1,0 +1,545 @@
+/* menu style */
+
+.navbar-default {
+    background-color: rgba(255, 255, 255, 0.8) !important;
+    background-image: none;
+    background-repeat: no-repeat;
+    padding-right: 70px;
+    border: none;
+    box-shadow: none;
+ }
+
+.navbar-brand {
+    font-weight: 600;
+    padding: 30px !important;
+    text-transform: uppercase;
+    font-family: Book Antiqua, Palatino, Palatino Linotype;
+    color: #090C19 !important;
+    font-size: 25px !important;
+    text-decoration: overline;
+}
+
+.navbar li a {
+    color: #090C19 !important;
+    height: inherit;
+    font-family: Book Antiqua, Palatino, Palatino Linotype;
+    font-size: 20px;
+    border-top: 3px solid transparent;
+}
+
+.navbar li a p {
+    margin: 0;
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+
+.user a {
+    padding: 0 !important;
+    font-size: 20px !important;
+    padding-top: 10px !important;
+}
+
+.user img {
+    width: 50px;
+    height: 50px;
+    border: 3px solid white;
+    margin-right: 5px;
+}
+
+.navbar li a:hover {
+    color: crimson !important;
+    border-top: 3px solid crimson;
+}
+
+.focus a {
+    border-top: 3px solid crimson !important;
+}
+
+.focus a p {
+    color: crimson !important;
+}
+
+.navbar button {
+    border-radius: 30px !important;
+    font-family: Book Antiqua, Palatino, Palatino Linotype;
+    font-size: 20px;
+    padding: 10px;
+    padding-left: 20px;
+    padding-right: 20px;
+    margin-top: 12px !important;
+}
+
+.login {
+    border: 2px solid #090C19 !important;
+    color: #090C19 !important;
+    background-color: transparent !important;
+}
+
+.register {
+    background-color: #090C19 !important;
+    color: white !important;
+}
+
+.dropdown button {
+    background-color: #090C19 !important;
+    color: white !important;
+    border: 1px solid white;
+}
+
+
+.dropdown li a:hover {
+    border-top: none;
+}
+
+/* form style */
+
+.registerform {
+    background-color: transparent; 
+    color: darkslategray; 
+    padding-top: 15vh;
+    margin: 0 auto;
+    position: absolute;
+    text-align: center;
+    font-family: Book Antiqua, Palatino, Palatino Linotype;
+    font-size: 20px;
+}
+
+.modal-content {
+    border-radius: 50px !important;
+}
+
+.modal-title {
+    font-size: 30px;
+    color: #090C19;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+.modal-header {
+    border-radius: 10px 10px 0 0;
+    background-color: #F6F2EE;
+}
+
+.modal-body {
+    margin: 40px;
+}
+
+.modal-footer {
+    border-radius: 0 0 10px 10px;
+    background-color: #F6F2EE;
+}
+
+.form-group label, .form-group input {
+    padding: 0;
+    font-size: 20px;
+    font-family: Book Antiqua, Palatino, Palatino Linotype;
+}
+
+.form-group input {
+    padding-left: 5px;
+}
+
+.radio {
+    text-align: left;
+    padding-top: 0 !important;
+}
+
+.row-footer {
+    padding: 10px;
+    padding-top: 60px;
+    color: white;
+    background-color: #34495e;
+    letter-spacing: 0.5px;
+    font-family: Book Antiqua, Palatino, Palatino Linotype;
+}
+
+.row-footer p {
+    font-family: Book Antiqua, Palatino, Palatino Linotype;
+    font-size: 22px;
+}
+
+.row-footer li a {
+    margin-top: 50px;
+    font-size: 18px;
+    color: #FFC266;
+}
+
+.row-footer li a:hover {
+    color: whitesmoke;
+    text-decoration: none;
+}
+
+.nav .btn {
+    color: #34495e;
+    margin: 5px;
+    background-color: white;
+    border-radius: 20px;
+}
+
+/* main style */
+
+.wizard {
+    margin: 10px auto;
+    margin-top: 0;
+    background-color: transparent;
+}
+
+    .wizard .nav-tabs {
+        position: relative;
+        margin: 10px auto;
+        margin-bottom: 0;
+        border-bottom-color: #998E68;
+    }
+
+    .wizard > div.wizard-inner {
+        position: relative;
+    }
+
+.connecting-line {
+    height: 2px;
+    background: #998E68;
+    position: absolute;
+    width: 60%;
+    margin: 0 auto;
+    left: 0;
+    right: 0;
+    top: 50%;
+    z-index: 1;
+}
+
+.wizard .nav-tabs > li.active > a, .wizard .nav-tabs > li.active > a:hover, .wizard .nav-tabs > li.active > a:focus {
+    color: #998E68;
+    cursor: default;
+    background-color: transparent;
+    border: 0;
+    border-bottom-color: transparent;
+}
+
+span.round-tab {
+    width: 70px;
+    height: 70px;
+    line-height: 70px;
+    display: inline-block;
+    border-radius: 100px;
+    background: #fff;
+    border: 2px solid #998E68;
+    z-index: 2;
+    position: absolute;
+    left: 0;
+    text-align: center;
+    font-size: 25px;
+}
+span.round-tab i{
+    color:#998E68;
+}
+.wizard li.active span.round-tab {
+    background: #fff;
+    border: 2px solid crimson;
+    
+}
+.wizard li.active span.round-tab i{
+    color: crimson;
+}
+
+.wizard .nav-tabs > li {
+    width: 33%;
+}
+
+.wizard li:after {
+    content: " ";
+    position: absolute;
+    left: 46%;
+    opacity: 0;
+    margin: 0 auto;
+    bottom: 0px;
+    border: 5px solid transparent;
+    border-bottom-color: #998E68;
+    transition: 0.1s ease-in-out;
+}
+
+.wizard li.active:after {
+    content: " ";
+    position: absolute;
+    left: 46%;
+    opacity: 1;
+    margin: 0 auto;
+    bottom: 0px;
+    border: 10px solid transparent;
+    border-bottom-color: #998E68;
+}
+
+.wizard .nav-tabs > li a {
+    width: 70px;
+    height: 70px;
+    margin: 20px auto;
+    border-radius: 100%;
+    padding: 0;
+}
+
+    .wizard .nav-tabs > li a:hover {
+        background: transparent;
+    }
+
+.wizard .tab-pane {
+    position: relative;
+}
+
+.wizard h3 {
+    margin-top: 0;
+}
+
+@media( max-width : 585px ) {
+
+    .wizard {
+        width: 90%;
+        height: auto !important;
+    }
+
+    span.round-tab {
+        font-size: 16px;
+        width: 50px;
+        height: 50px;
+        line-height: 50px;
+    }
+
+    .wizard .nav-tabs > li a {
+        width: 50px;
+        height: 50px;
+        line-height: 50px;
+    }
+
+    .wizard li.active:after {
+        content: " ";
+        position: absolute;
+        left: 35%;
+    }
+}
+
+#step1 input, #step2 input, #step3 input {
+    border: 5px solid #998E68;
+    border-top: none;
+    border-left: none;
+    border-right: none;
+    margin: 20px 0;
+    font-size: 28px;
+    height: 60px;
+    color: #fff;
+    text-align: center;
+    background-color: transparent;
+}
+
+.group {
+  background-color: rgba(9, 12, 25, 1);
+  outline: 5px solid #090C19;
+  outline-offset: 15px;
+  padding: 20px; 
+  padding-top: 30px;
+}
+
+.title {
+    background-color: rgba(0, 0, 0, 0.2) !important; 
+    color: #fff; 
+    padding: 25vh 0;
+    height: 100vh; 
+    width: 100%; 
+    margin: 0 auto;
+    position: absolute;
+    text-align: center;
+    font-family: Book Antiqua, Palatino, Palatino Linotype;
+    font-size: 18px;
+}
+
+.title p {
+    font-size: 50px;
+    padding: 10px;
+    margin: 0 10%;
+    border: 5px solid #998E68;
+}
+
+.title h3 {
+    color: #998E68;
+    padding: 10px 0 0 0;
+}
+
+/* search style */
+
+.searchbar {
+  margin: 25px 0;
+}
+
+.searchbar input {
+  height: 40px;
+  font-size: 25px;
+}
+
+.searchbar button {
+  background-color: crimson;
+  color: #fff;
+  height: 40px;
+  font-size: 20px;
+}
+
+.searchbar button:hover {
+  color: #090C19;
+  background-color: crimson;
+}
+
+/* map style */
+
+#googleMap { 
+  height: 100%; 
+  width: 100%; 
+  position: absolute; 
+  top: 0; 
+  left: 0; 
+  z-index: -1;
+}
+
+/* pop-up style */
+
+.placecard {
+  font-family: Book Antiqua, Palatino, Palatino Linotype;
+  width: 400px;
+  margin: -5px -20px 0 -10px !important;
+}
+
+.card {
+    padding-top: 20px;
+    margin: 10px 0 20px 0;
+    border-top-width: 0;
+    border-bottom-width: 2px;
+    -webkit-border-radius: 3px;
+    -moz-border-radius: 3px;
+    border-radius: 3%;
+}
+
+.card.hovercard {
+    position: relative;
+    padding-top: 0;
+    overflow: hidden;
+    background-color: transparent;
+}
+
+.card.hovercard .avatar {
+    position: relative;
+    font-size: 40px;
+    padding-top: 25px;
+    margin-left: 150px;
+    color: #fff;
+    text-align: center;
+    background-color: #090c19;
+    margin-bottom: -50px;
+}
+
+.card.hovercard .avatar {
+    width: 100px;
+    height: 100px;
+    max-width: 100px;
+    max-height: 100px;
+    -webkit-border-radius: 50%;
+    -moz-border-radius: 50%;
+    border-radius: 50%;
+    border: 5px solid #998e68;
+}
+
+.card.hovercard .info {
+    border-top: 20px solid #090c19;
+    padding: 20px 8px 10px;
+    background-color: #fff;
+}
+
+.card.hovercard .info .desc {
+    margin: 0 10%;
+}
+
+.card.hovercard .info .desc span {
+    padding: 9px;
+    width: 45px;
+    height: 45px;
+    line-height: 30px;
+    border-radius: 100px;
+    background: #fff;
+    border: 2px solid #090c19;
+    font-size: 20px;
+    margin: 7px;
+    left: 0;
+    display: inline-block;
+}
+
+.card.hovercard .info .desc p {
+    display: inline-block;
+    font-size: 18px;
+}
+
+.attend {
+  background-color: #090c19;
+  text-align: center;
+  padding: 10px 0 5px 0;
+}
+
+.attend h3 {
+  margin-top: 5px;
+  color: #fff;
+  padding: 0 8px;
+}
+
+.tags a {
+  width: 40px;
+  height: 40px;
+  border:2px solid #090C19;
+  display:inline-block;
+  color:#090c19;
+  background:#998e68;
+  -webkit-box-shadow:0 1px 1px 0 rgba(180,180,180,0.1);
+  box-shadow:0 1px 1px 0 rgba(180,180,180,0.1);
+  -webkit-transition:all .1s ease-in-out;
+  -moz-transition:all .1s ease-in-out;
+  -o-transition:all .1s ease-in-out;
+  -ms-transition:all .1s ease-in-out;
+  transition:all .1s ease-in-out;
+  border-radius:50%;
+  margin:0 10px 10px 0;
+  padding:10px 7px
+}
+
+.tags a:hover {
+  border-color:#fff;
+  background-color: crimson;
+  color: #fff;
+}
+
+.join {
+  background-color: #090c19;
+  text-align: center;
+  padding: 0 10px 10px 10px;
+}
+
+.join button {
+  width: 150px;
+}
+
+.placecard .tooltip {
+    background-color: #fff;
+    position: relative;
+    display: inline-block;
+    border-bottom: 1px dotted black;
+}
+
+.tooltip .tooltiptext {
+    visibility: hidden;
+    width: 120px;
+    background-color: black;
+    color: #fff;
+    text-align: center;
+    border-radius: 6px;
+    padding: 5px 0;
+    position: absolute;
+    z-index: 1;
+    bottom: 100%;
+    left: 50%;
+    margin-left: -60px;
+}
+
+.tooltip:hover .tooltiptext {
+    visibility: visible;
+}
