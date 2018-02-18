@@ -1,6 +1,5 @@
 {% extends "layout.html" %}
 {% block head_js_block %}
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.17.0/jquery.validate.min.js"></script>
 <script>
 $().ready(function() {
@@ -160,5 +159,77 @@ $().ready(function() {
         </div>
     </section>
 
-	<div id="googleMap""></div>
+    {% if session.username is defined and session.username != None %}
+    <section id="momentum" class="container-fluid main">
+        <div class="row row-content">
+            <div class="col-xs-12 title">
+            	<div class="col-xs-6 col-xs-offset-3 group">
+	                <p>Welcome to Cupid</p>
+            		<h4>Find people who are having the same thoughts with you.</h4>
+					<div class="row">
+				        <div class="wizard col-md-10 col-md-offset-1">
+				            <div class="wizard-inner">
+				                <div class="connecting-line"></div>
+				                <ul class="nav nav-tabs" role="tablist">
+				                    <li role="presentation" class="active">
+				                        <a href="#step1" data-toggle="tab" aria-controls="step1" role="tab" title="What">
+				                            <span class="round-tab">
+				                                <i class="glyphicon glyphicon-glass"></i>
+				                            </span>
+				                        </a>
+				                    </li>
+
+				                    <li role="presentation" class="disabled">
+				                        <a href="#step2" data-toggle="tab" aria-controls="step2" role="tab" title="Where">
+				                            <span class="round-tab">
+				                                <i class="glyphicon glyphicon-map-marker"></i>
+				                            </span>
+				                        </a>
+				                    </li>
+				                    <li role="presentation" class="disabled">
+				                        <a href="#step3" data-toggle="tab" aria-controls="step3" role="tab" title="Whenh">
+				                            <span class="round-tab">
+				                                <i class="glyphicon glyphicon-calendar"></i>
+				                            </span>
+				                        </a>
+				                    </li>
+				                </ul>
+				            </div>
+
+				            <form role="form" id="createEventForm">
+				                <div class="tab-content">
+				                    <div class="tab-pane active" role="tabpanel" id="step1">
+				                        <input class="form-control" id="message" placeholder="Type an activity that you want to do"></input>
+				                        <ul class="list-inline pull-right">
+				                            <li><button type="button" class="btn btn-default next-step">Skip</button></li>
+				                            <li><button type="button" class="btn btn-primary next-step">Save and continue</button></li>
+				                        </ul>
+				                    </div>
+				                    <div class="tab-pane" role="tabpanel" id="step2">
+				                        <input class="form-control" id="location" placeholder="Type a place that you want to go"></input>
+				                        <ul class="list-inline pull-right">
+				                            <li><button type="button" class="btn btn-default prev-step">Previous</button></li>
+				                            <li><button type="button" class="btn btn-default next-step">Skip</button></li>
+				                            <li><button type="button" class="btn btn-primary next-step">Save and continue</button></li>
+				                        </ul>
+				                    </div>
+				                    <div class="tab-pane" role="tabpanel" id="step3">
+				                        <input class="form-control" id="time" placeholder="Type the date and time you want to go"></input>
+				                        <ul class="list-inline pull-right">
+				                            <li><button type="button" class="btn btn-default prev-step">Previous</button></li>
+				                            <li><button type="button" class="btn btn-default next-step">Skip</button></li>
+				                            <li><button type="submit" class="btn btn-primary btn-info-full next-step">Complete</button></li>
+				                        </ul>
+				                    </div>
+				                </div>
+				            </form>
+				        </div>
+				   </div>
+				</div>
+			</div>
+        </div>
+    </section>
+    {% endif %}
+
+	<div id="googleMap"></div>
 {% endblock %}
