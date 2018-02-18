@@ -197,16 +197,17 @@ $().ready(function() {
 				            </div>
 
 				            <form role="form" id="createEventForm" action="event" method="post">
+                                <input class="hidden" id="host" name="host" value="{{ session.username }}">
 				                <div class="tab-content">
 				                    <div class="tab-pane active" role="tabpanel" id="step1">
-				                        <input class="form-control" id="message" placeholder="Type an activity that you want to do"></input>
+				                        <input class="form-control" id="message" name="message" placeholder="Type an activity that you want to do"></input>
 				                        <ul class="list-inline pull-right">
 				                            <li><button type="button" class="btn btn-default next-step">Skip</button></li>
 				                            <li><button type="button" class="btn btn-primary next-step">Save and continue</button></li>
 				                        </ul>
 				                    </div>
 				                    <div class="tab-pane" role="tabpanel" id="step2">
-				                        <input class="form-control" id="location" placeholder="Type a place that you want to go"></input>
+				                        <input class="form-control" id="location" name="location" placeholder="Type a place that you want to go"></input>
 				                        <ul class="list-inline pull-right">
 				                            <li><button type="button" class="btn btn-default prev-step">Previous</button></li>
 				                            <li><button type="button" class="btn btn-default next-step">Skip</button></li>
@@ -214,7 +215,7 @@ $().ready(function() {
 				                        </ul>
 				                    </div>
 				                    <div class="tab-pane" role="tabpanel" id="step3">
-				                        <input class="form-control" id="time" placeholder="Type the date and time you want to go"></input>
+				                        <input class="form-control" id="time" name="time" placeholder="Type the date and time you want to go"></input>
 				                        <ul class="list-inline pull-right">
 				                            <li><button type="button" class="btn btn-default prev-step">Previous</button></li>
 				                            <li><button type="button" class="btn btn-default next-step">Skip</button></li>
