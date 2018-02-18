@@ -232,6 +232,7 @@ $().ready(function() {
 			</div>
         </div>
     </section>
+
     <script>
         $('#createEventForm').submit(function() {
             var result = chrono.parse($('#createEventForm #inputTime').val());
@@ -275,7 +276,9 @@ function initialize()
                     '<div class="attend">'+
                         '<h3>Attendees</h3>'+
                         '<div class="tags">'+
-                            '<a href=" ">YH</a>'+
+                            {% for a in entry.attendee %}
+                            '<a href="#">{{ a[0] }}</a>'+
+                            {% endfor %}
                         '</div>'+
                     '</div>'
                     {% if session.username is defined and session.username != None %}
