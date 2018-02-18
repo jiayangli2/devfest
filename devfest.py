@@ -5,6 +5,9 @@ import hashlib, uuid
 from helper import populate
 import urllib
 from markupsafe import Markup
+import sys
+reload(sys)
+sys.setdefaultencoding("utf-8")
 
 app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///./app.db'#/home/prokingsley/devfest/app.db' 
