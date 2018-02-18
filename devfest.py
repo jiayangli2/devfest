@@ -3,6 +3,10 @@ from flask_sqlalchemy import SQLAlchemy
 import os
 import hashlib, uuid
 from helper import populate
+try:
+    from urllib import quote  # Python 2
+except ImportError:
+    from urllib.parse import quote  # Python 3
 
 app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///./app.db'#/home/prokingsley/devfest/app.db' 
@@ -36,6 +40,9 @@ class Attend(db.Model):
     username = db.Column(db.String(80), primary_key=True, nullable=False)
 
 
+@app.template_filter('urlencode')
+def urlencode_filter(s):
+    return quote(s, safe='')
 
 @app.route('/')
 def index():
@@ -52,7 +59,7 @@ def index():
 @app.route('/login', methods=['POST'])
 def login():
     uname = request.form['username']
-    pwd = hashlib.sha512(request.form['password'] + salt).hexdigest()
+    pwd = hashlib.sha512((request.form['password'] + salt).encode('ascii')).hexdigest()
     try:
         temp = User.query.filter_by(username=uname).first()
         if temp == None or temp.password != pwd:
@@ -73,7 +80,7 @@ def signup():
     if request.method == 'POST':
         print ("hello world!")
         uname = request.form['username']
-        pwd = hashlib.sha512(request.form['password'] + salt).hexdigest()
+        pwd = hashlib.sha512((request.form['password'] + salt).encode('ascii')).hexdigest()
         fname = request.form['fullname']
         email = request.form['email']
         phone = request.form['phone']
@@ -97,7 +104,7 @@ def signup():
 def logout():
     session.pop('username', None)
     session.pop('fullname', None)
-    session.pop('phoen', None)
+    session.pop('phone', None)
     session.pop('email', None)
     return redirect(url_for('index'))
 
@@ -105,4 +112,4 @@ def logout():
 app.secret_key = 'A0Zr98j/3yX R~XHH!jmN]LWX/,?RT'
 
 if __name__ == '__main__':
-    app.run(host='0.0.0.0')
+    app.run()
