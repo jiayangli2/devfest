@@ -84,7 +84,7 @@ def index():
     # DEBUG: this is debugging code to see what request looks like
     print (request.args)
     context = {'events': get_all_events()}
-
+    session['createEvent'] = False
     return render_template("index.html", **context)
 
 
@@ -155,7 +155,7 @@ def createEvent():
         context = dict(data = err_msg)
         return render_template("index.html", **context)
     print ("Create Event Succeeded!")
-    return redirect(url_for('events'))
+    return redirect(url_for('/'))
 
 @app.route('/events', methods=['GET'])
 def renderJSON():
@@ -184,13 +184,20 @@ def attendEvent(eid, username):
         context = dict(data = err_msg)
         return render_template("index.html", **context)
     print ("Attend Event Succeeded!")
-    return redirect(url_for('events'))
+    return redirect(url_for('index'))
 
 @app.route('/logout')
 def logout():
     for key in session.keys():
         session.pop(key)
     return redirect(url_for('index'))
+
+
+@app.route('/create')
+def create_event():
+    session['createEvent'] = True
+    context = dict()
+    return render_template("index.html", **context)
 
 
 app.secret_key = 'A0Zr98j/3yX R~XHH!jmN]LWX/,?RT'
