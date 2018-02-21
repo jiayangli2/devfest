@@ -232,4 +232,4 @@ app.secret_key = 'A0Zr98j/3yX R~XHH!jmN]LWX/,?RT'
 
 if __name__ == '__main__':
     db.create_all()
-    app.run(host='0.0.0.0')
+    app.run(host='0.0.0.0', port = 80)
