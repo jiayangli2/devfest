@@ -39,6 +39,8 @@ class Event(db.Model):
     message = db.Column(db.String(300), nullable=False)
     time = db.Column(db.String(80), nullable=False)
     location = db.Column(db.String(80), nullable=False)
+    lon = db.Column(db.String(80), nullable=False)
+    lat = db.Column(db.String(80), nullable=False)
     def __repr__(self):
         return '<Event %r>' % self.message
 
@@ -69,14 +71,13 @@ def get_all_events():
         attendee = []
         for p in attendee_db:
             attendee.append(p.User.fullname)
-        res = requests.get('https://maps.googleapis.com/maps/api/geocode/json?address=' + e.location)
-        res = res.json()
-
-        if len(res['results']) != 0:
-            event_list.append(
-                {'host': {'username': e.host, 'fullname': User.query.filter_by(username=e.host).first().fullname},
-                 'location': e.location, 'get_location': res['results'][0]['geometry']['location'], 'message': e.message,
-                 'time': e.time, 'eid': e.eid, 'attendee': attendee})
+        # res = requests.get('https://maps.googleapis.com/maps/api/geocode/json?address=' + e.location.replace(" ", "%20"))
+        # res = res.json()
+ 
+        event_list.append(
+            {'host': {'username': e.host, 'fullname': User.query.filter_by(username=e.host).first().fullname},
+                'location': e.location, 'get_location': {"lat":e.lat, "lng":e.lon}, 'message': e.message,
+                'time': e.time, 'eid': e.eid, 'attendee': attendee})
     return event_list
 
 
@@ -95,14 +96,13 @@ def get_events(keywords):
             attendee = []
             for p in attendee_db:
                 attendee.append(p.User.fullname)
-            res = requests.get('https://maps.googleapis.com/maps/api/geocode/json?address=' + e.location)
-            res = res.json()
+            # res = requests.get('https://maps.googleapis.com/maps/api/geocode/json?address=' + e.location.replace(" ", "%20"))
+            # res = res.json()
 
-            if len(res['results']) != 0:
-                event_list.append(
+            event_list.append(
                     {'host': {'username': e.host, 'fullname': User.query.filter_by(username=e.host).first().fullname},
-                     'location': e.location, 'get_location': res['results'][0]['geometry']['location'], 'message': e.message,
-                     'time': e.time, 'eid': e.eid, 'attendee': attendee})
+                        'location': e.location, 'get_location': {"lat":e.lat, "lng":e.lon}, 'message': e.message,
+                        'time': e.time, 'eid': e.eid, 'attendee': attendee})
     return event_list
 
 
@@ -171,17 +171,23 @@ def createEvent():
     message = request.form['message']
     event_time = request.form['time']
     location = request.form['location']
-    
+    key = "&key=AIzaSyAOd0yLa2PRCmldYBjXYLF5eZXhzaCv8jE"
+    res = requests.get('https://maps.googleapis.com/maps/api/geocode/json?address=' + location.replace(" ", "+") + key)
+    res = res.json()
+    lat = "40.8075355"
+    lon = "-73.9625727"
+    if len(res["results"]) != 0:
+        lat = res["results"][0]["geometry"]["location"]["lat"]
+        lon = res["results"][0]["geometry"]["location"]["lng"]
     (tokens, actions_list) = parser(message)
     if len(actions_list) == 0:
         actions_list.append(message)
 
-    event_created = Event(eid = eid, host = host, message = actions_list[0] , time = event_time, location = location)
+    event_created = Event(eid = eid, host = host, message = actions_list[0] , time = event_time, location = location, lat=lat , lon=lon)
 
     try:
         db.session.add(event_created)
         db.session.commit()
-        print ("sdiuhqwiudhiwqdhiuahd")
     except:
         err_msg = "Create Event Failed!"
         context = dict(data = err_msg)
@@ -191,18 +197,7 @@ def createEvent():
 
 @app.route('/events', methods=['GET'])
 def renderJSON():
-    event_list = []
-    events = Event.query.all() 
-    for e in events:
-        attendee_db = db.session.query(Attend, User).filter(Attend.username == User.username).filter(e.eid == Attend.eid).all()
-        attendee = []
-        for p in attendee_db:
-            attendee.append(p.User.fullname)
-        res = requests.get('https://maps.googleapis.com/maps/api/geocode/json?address=' + e.location)
-        res = res.json()
-        if len(res['results']) != 0:
-            event_list.append({'host' : {'username':e.host, 'fullname':User.query.filter_by(username=e.host).first().fullname},'location' : e.location, 'get_location' : res['results'][0]['geometry']['location'], 'message' : e.message, 'time' : e.time, 'eid' : e.eid, 'attendee':attendee})
-    return jsonify(event_list)
+    return jsonify(get_all_events())
 
 
 
@@ -236,4 +231,5 @@ def create_event():
 app.secret_key = 'A0Zr98j/3yX R~XHH!jmN]LWX/,?RT'
 
 if __name__ == '__main__':
-    app.run(host='0.0.0.0',debug=True)
+    db.create_all()
+    app.run(host='0.0.0.0')

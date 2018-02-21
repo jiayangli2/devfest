@@ -34,7 +34,7 @@ def parser(text):
         count += 1
 
     if len(actions) == 0:
-        actions.append("Hello World!")
+        actions.append(text)
 
     return (tokens, actions)
 
